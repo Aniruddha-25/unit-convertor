@@ -1,0 +1,54 @@
+.tc-modes { margin-bottom: 18px; }
+.tc-note { margin: 0 0 14px; padding: 10px 12px; border-radius: 8px; background: var(--accent-soft); color: var(--muted); font-size: .88rem; }
+.tc-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+
+.seg { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--surface); }
+.seg-btn { font: inherit; font-size: .9rem; min-height: 40px; padding: 6px 14px; border: 0; background: transparent; color: var(--text); cursor: pointer; transition: background .15s; }
+.seg-btn + .seg-btn { border-left: 1px solid var(--border); }
+.seg-btn:hover { background: var(--accent-soft); }
+.seg-btn.on { background: var(--accent); color: #fff; }
+.seg-btn:focus-visible, .ct-part:focus-visible, .dial:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.ct-clock { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 16px; }
+.ct-display { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 10px; }
+.ct-seg { display: inline-flex; align-items: center; }
+.ct-colon { font-size: 1.8rem; font-weight: 700; margin: 0 2px; color: var(--muted); }
+.ct-part {
+  font: inherit; font-size: 1.8rem; font-weight: 700; font-variant-numeric: tabular-nums; min-width: 64px; min-height: 52px; padding: 2px 10px;
+  border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); cursor: pointer; transition: background .15s, border-color .15s;
+}
+.ct-part:hover { background: var(--accent-soft); }
+.ct-part.on { border-color: var(--accent); background: var(--accent-soft); }
+.ct-part.bad { border-color: var(--danger); }
+.ct-step { margin: 0; color: var(--muted); font-size: .85rem; }
+
+.dial { width: min(100%, 280px); aspect-ratio: 1; touch-action: none; user-select: none; -webkit-user-select: none; cursor: pointer; border-radius: 50%; }
+.dial-face { fill: var(--surface); stroke: var(--border); stroke-width: 1; }
+.dial-tick { stroke: var(--border); stroke-width: 1; }
+.dial-hand { stroke: var(--accent); stroke-width: 2; }
+.dial-hub { fill: var(--accent); }
+.dial-knob { fill: var(--accent); }
+.dial-label { fill: var(--text); font-size: 11px; pointer-events: none; font-variant-numeric: tabular-nums; }
+.dial-label.inner { font-size: 9px; fill: var(--muted); }
+.dial-label.on { fill: #fff; font-weight: 700; }
+
+.ct-type { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; }
+.ct-type .uc-field { flex: 1 1 90px; }
+.ct-ampm-label { font-size: .85rem; font-weight: 600; color: var(--muted); }
+.ct-errors { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 4px; }
+
+.ct-line { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.ct-line .uc-result-eq { min-width: 64px; }
+.ct-line .uc-result-value { flex: 1 1 auto; }
+.ct-result { gap: 10px; }
+.ct-elapsed { margin-top: 16px; }
+.ct-elapsed .uc-field { margin-bottom: 8px; }
+
+@media (max-width: 520px) {
+  .ct-part { font-size: 1.5rem; min-width: 56px; }
+  .seg-btn { padding: 6px 12px; }
+  .uc-result-value { font-size: 1.6rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .seg-btn, .ct-part { transition: none; }
+}

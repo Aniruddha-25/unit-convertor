@@ -1,0 +1,78 @@
+.tz-hint { margin: 8px 0 0; color: var(--muted); font-size: .85rem; }
+.tz-h { margin: 22px 0 10px; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.tz-zones { flex-direction: column; align-items: stretch; gap: 0; }
+.tz-zones .uc-swap { align-self: center; margin: -4px 0 12px; transform: rotate(90deg); }
+.uc input[type="date"] { min-height: 44px; }
+
+.zc { position: relative; }
+.zc-list { position: absolute; z-index: 20; top: 100%; left: 0; right: 0; margin: 2px 0 0; padding: 4px; list-style: none; max-height: 260px; overflow-y: auto; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); box-shadow: 0 8px 24px rgba(0, 0, 0, .18); }
+.zc-opt { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; cursor: pointer; }
+.zc-opt.active { background: var(--accent-soft); }
+.zc-opt.sel .zc-main { font-weight: 700; }
+.zc-main { display: flex; flex-direction: column; min-width: 0; overflow-wrap: anywhere; }
+.zc-sub { color: var(--muted); font-size: .78rem; }
+.zc-off { flex: none; color: var(--muted); font-size: .8rem; font-variant-numeric: tabular-nums; }
+.zc-empty { padding: 10px; color: var(--muted); }
+
+.tz-dst { margin: 0 0 16px; padding: 12px 14px; border: 1px solid var(--accent); border-radius: 10px; background: var(--accent-soft); }
+.tz-dst legend { padding: 0 6px; font-weight: 700; }
+.tz-dst p { margin: 0 0 8px; font-size: .9rem; }
+.tz-radio { display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; }
+.tz-radio input { width: auto; margin-top: 4px; }
+.tz-radio input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tz-radio label { cursor: pointer; }
+
+.tz-day { align-self: flex-start; margin-top: 8px; background: var(--surface); color: var(--text); }
+.tz-day.shift { background: var(--accent); color: #fff; }
+
+.tz-side { display: flex; flex-direction: column; min-width: 0; margin-bottom: 16px; }
+.tz-side .uc-field { margin-bottom: 8px; }
+.tz-zones .tz-side { align-items: stretch; }
+.tz-time {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; padding: 12px 14px; font: inherit; text-align: left;
+  border: 1px solid var(--border); border-radius: 10px; background: var(--accent-soft); color: var(--text); cursor: pointer; transition: border-color .15s, background .15s;
+}
+.tz-time:hover, .tz-time[aria-expanded="true"] { border-color: var(--accent); }
+.tz-time:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tz-time-main { font-size: 1.7rem; font-weight: 700; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; line-height: 1.2; }
+.tz-time-sub { color: var(--muted); font-size: .88rem; overflow-wrap: anywhere; }
+
+.pop-wrap { position: relative; }
+.pop {
+  /* fixed + inset/margin auto: centred in the viewport and not clipped by the dialog's scroll container */
+  position: fixed; inset: 0; margin: auto; z-index: 30; width: min(360px, calc(100% - 32px)); height: fit-content; max-height: calc(100dvh - 32px); overflow-y: auto;
+  display: flex; flex-direction: column; padding: 28px 20px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg); box-shadow: 0 12px 32px rgba(0, 0, 0, .25);
+  opacity: 0; transform: scale(.97); visibility: hidden; pointer-events: none;
+  transition: opacity .15s ease, transform .15s ease, visibility 0s linear .15s;
+}
+.pop.open { opacity: 1; transform: none; visibility: visible; pointer-events: auto; transition-delay: 0s; }
+.pop:focus { outline: none; }
+.pop-close {
+  position: absolute; top: 6px; right: 6px; display: grid; place-items: center; width: 32px; height: 32px; padding: 0;
+  border: 0; border-radius: 50%; background: transparent; color: var(--muted); cursor: pointer;
+}
+.pop-close:hover { background: var(--accent-soft); color: var(--text); }
+.pop-close:focus-visible, .pop-ok:focus-visible, .pop-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.pop-body { margin-block: auto; } /* centres the group in the panel; stays reachable if the panel scrolls */
+.pop-body, .pop .cti { display: flex; flex-direction: column; align-items: center; width: 100%; }
+.pop .tc-row { justify-content: center; margin-bottom: 12px; }
+.pop .uc-field { align-items: center; align-self: stretch; text-align: center; }
+.pop .uc-field input[type="date"] { max-width: 240px; text-align: center; }
+.pop .ct-clock { width: 100%; margin-bottom: 0; }
+.pop-actions { align-self: stretch; }
+.pop .ct-part { min-width: 52px; font-size: 1.5rem; }
+.pop .dial { width: min(100%, 240px, 32dvh); } /* only shrinks on short screens so the whole picker stays visible */
+.pop .ct-type .uc-field { flex: 1 1 70px; }
+.pop-actions { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 12px; }
+.pop-link { font: inherit; font-size: .88rem; padding: 8px 4px; border: 0; background: none; color: var(--accent); cursor: pointer; text-decoration: underline; }
+.pop-ok { font: inherit; padding: 8px 18px; border-radius: 8px; border: 0; background: var(--accent); color: #fff; cursor: pointer; }
+.pop-ok:disabled { opacity: .45; cursor: not-allowed; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pop, .tz-time { transition: none; }
+}
+
+
+@media (max-width: 520px) {
+  .tz-time-main { font-size: 1.25rem; }
+}
