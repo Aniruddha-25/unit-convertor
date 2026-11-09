@@ -1,130 +1,106 @@
 # Unit Converter
 
-A React + TypeScript + Vite app. Pick a category from the grid; it opens in a dialog (close with the × button or Escape).
+A React + TypeScript web app for unit conversion. Pick a category from the grid and it opens in a dialog.
+
+**Live:** <https://Aniruddha-25.github.io/unit-convertor/>
 
 ## Converters
 
-| Category | Status |
-| --- | --- |
-| Time | Available: **Duration** (ns → years) and **Clock time** (12h/24h time of day) |
-| Time Zone | Available |
-| All others | Coming soon |
+Currently available: **Time** (Duration, Clock time) and **Time Zone**. All others are coming soon.
 
-### Time Zone Converter
+```mermaid
+flowchart LR
+    A["Unit Converter"]
 
-Converts a date and time between any two IANA time zones.
-- **Input:** the date and time are shown compactly. Click a time to open the picker (a native date picker in ISO `YYYY-MM-DD`, so day/month order is never ambiguous, plus a clock dial or typed fields in 12-hour or 24-hour format). It closes with ×, Escape or an outside click. Hours, minutes, seconds and dates (including leap years) are validated with clear messages.
-- **Input:** the date and time are shown compactly; click a time to open the date picker and clock dial (closes with ×, Escape or an outside click). Dates use (native date picker, ISO `YYYY-MM-DD`, so day/month order is never ambiguous) and a time chosen on a clock dial or typed, in 12-hour (with AM/PM) or 24-hour format. Hours, minutes, seconds and dates (including leap years) are validated with clear messages.
-- **Zones:** a searchable list of every IANA zone the browser reports (plus UTC). Search by city, country or identifier (e.g. "india", "new york", "Asia/Tok"). Each option shows its *current* UTC offset.
-- **Accuracy:** [`@js-temporal/polyfill`](https://github.com/js-temporal/temporal-polyfill) with the IANA database. No hand-maintained UTC offset tables, and the browser's local zone is never assumed. Offsets and daylight saving are computed for the exact date chosen.
-- **DST edge cases:** a local time that happens twice (clocks go back) or never (clocks jump forward) is detected and explained, and you choose which occurrence or adjustment to use. No guess is made.
-- **Result:** converted time, weekday and full date, offset, and whether it is the previous, same or next day compared with the source date.
-- **Swap** exchanges the zones and keeps the same moment in time. **Copy** copies the converted result. **Reset** restores the defaults.
+    A --> B["Physical"]
+    A --> C["Computer"]
+    A --> D["Date & Time"]
+    A --> E["Other"]
 
-Code layout: `src/converters/timezone/timeZoneUtils.ts` (pure logic, tested), `zoneAliases.ts` (search aliases and legacy-name mapping only), `src/components/converter/TimeZoneConverter.tsx` (UI), `ZoneCombobox.tsx` (searchable select), `ClockTimeInput.tsx` (shared clock input).
+    B --> B1["Time<br/>(Duration, Clock time)"]
+    B --> B2["Length"]
+    B --> B3["Area"]
+    B --> B4["Volume"]
+    B --> B5["Mass / Weight"]
+    B --> B6["Temperature"]
+    B --> B7["Speed"]
+    B --> B8["Pressure"]
+    B --> B9["Energy"]
+    B --> B10["Power"]
+    B --> B11["Force"]
+    B --> B12["Density"]
+    B --> B13["Frequency"]
+    B --> B14["Angle"]
 
-### Time Converter
+    C --> C1["Data Storage"]
+    C --> C2["Data Transfer Rate"]
 
-- **Duration:** units are converted through seconds using fixed factors. Months and years are *averages* (1 year = 365.25 days, 1 month = 30.4375 days), not calendar months.
-- **Clock time:** a time of day (not a duration) shown in 12-hour and 24-hour form, plus elapsed time since midnight.
+    D --> D1["Time Zone"]
+    D --> D2["Time Duration"]
+    D --> D3["Date Difference"]
 
-## Scripts
+    E --> E1["Fuel Economy"]
+    E --> E2["Cooking Measurements"]
+    E --> E3["Shoe Size"]
 
-```
-npm run dev     # start the dev server
-npm run build   # type-check and build
-npm run lint
-npm test        # unit tests (Node test runner)
-```
+    classDef root fill:#e5e7eb,stroke:#374151,color:#111827
+    classDef physical fill:#dbeafe,stroke:#2563eb,color:#1e3a8a
+    classDef computer fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef datetime fill:#fef3c7,stroke:#d97706,color:#78350f
+    classDef other fill:#f3e8ff,stroke:#9333ea,color:#581c87
 
----
-
-# React + TypeScript + Vite template notes
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## Deploying to GitHub Pages
-
-The project is configured for the repository URL:
-
-<https://Aniruddha-25.github.io/unit-convertor/>
-
-To enable deployment:
-
-1. In the repository on GitHub, open **Settings → Pages** and set the build and deployment source to **GitHub Actions**.
-2. Push changes to the `main` branch. The workflow in `.github/workflows/deploy.yml` installs dependencies with `npm ci`, builds the site with `npm run build`, and deploys the `dist` directory.
-3. After the workflow completes, the site will be available at the URL above.
-
-The Vite base path is set to `/unit-convertor/` so built assets resolve correctly from the repository’s Pages URL.
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+    class A root
+    class B,B1,B2,B3,B4,B5,B6,B7,B8,B9,B10,B11,B12,B13,B14 physical
+    class C,C1,C2 computer
+    class D,D1,D2,D3 datetime
+    class E,E1,E2,E3 other
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+> Source of truth: [src/config/categories.ts](src/config/categories.ts)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Adding a converter
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Add or update the category in `src/config/categories.ts` (set `status: 'available'` and attach a `converter`).
+2. Update the diagram above: add a node under its group and list it in the matching `class` line.
 
+## Tech Stack
+
+- React 19 + TypeScript
+- Vite
+- `@js-temporal/polyfill` (time zones and DST)
+- ESLint, Node test runner
+
+## Getting Started
+
+Requires Node.js (CI uses 22).
+
+```bash
+git clone https://github.com/Aniruddha-25/unit-convertor.git
+cd unit-convertor
+npm install
 ```
+
+| Task             | Command           |
+|------------------|-------------------|
+| Run locally      | `npm run dev`     |
+| Production build | `npm run build`   |
+| Preview build    | `npm run preview` |
+| Lint             | `npm run lint`    |
+| Test             | `npm test`        |
+
+## Deployment
+
+Deployed to GitHub Pages by `.github/workflows/deploy.yml` on every push to `main`.
+
+1. In **Settings → Pages**, set the source to **GitHub Actions**.
+2. Push to `main`.
+
+The Vite base path is `/unit-convertor/` ([vite.config.ts](vite.config.ts)). Update it if the repository is renamed.
+
+## Contributing
+
+Fork, create a branch, run `npm run lint` and `npm test`, then open a pull request.
+
+## License
+
+No license file is included yet.
