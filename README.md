@@ -44,6 +44,7 @@ flowchart LR
     G --> G1["Data Storage"]
     G --> G2["Data Transfer Rate"]
 
+    H --> H0["Currency"]
     H --> H1["Fuel Economy"]
     H --> H2["Cooking Measurements"]
     H --> H3["Shoe Size"]
@@ -65,7 +66,7 @@ flowchart LR
     class E,E1,E2,E3 energy
     class F,F1,F2,F3,F4 datetime
     class G,G1,G2 digital
-    class H,H1,H2,H3 lifestyle
+    class H,H0,H1,H2,H3 lifestyle
     class F1,F2 available
 ```
 
