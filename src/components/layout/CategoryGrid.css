@@ -1,0 +1,60 @@
+/* Category section colours. Each group sets --group; headings, icons and hover states derive from it. */
+:root {
+  --cat-basic: #1d4ed8;
+  --cat-geometry: #0f766e;
+  --cat-motion: #b91c1c;
+  --cat-energy: #c2410c;
+  --cat-datetime: #6d28d9;
+  --cat-digital: #15803d;
+  --cat-finance: #a16207;
+  --cat-lifestyle: #be185d;
+}
+:root[data-theme='dark'] {
+  --cat-basic: #60a5fa;
+  --cat-geometry: #2dd4bf;
+  --cat-motion: #f87171;
+  --cat-energy: #fb923c;
+  --cat-datetime: #a78bfa;
+  --cat-digital: #4ade80;
+  --cat-finance: #facc15;
+  --cat-lifestyle: #f472b6;
+}
+
+.grid-group[data-group='basic'] { --group: var(--cat-basic); }
+.grid-group[data-group='geometry'] { --group: var(--cat-geometry); }
+.grid-group[data-group='motion'] { --group: var(--cat-motion); }
+.grid-group[data-group='energy'] { --group: var(--cat-energy); }
+.grid-group[data-group='datetime'] { --group: var(--cat-datetime); }
+.grid-group[data-group='digital'] { --group: var(--cat-digital); }
+.grid-group[data-group='finance'] { --group: var(--cat-finance); }
+.grid-group[data-group='lifestyle'] { --group: var(--cat-lifestyle); }
+
+.grid-group[data-group] {
+  --icon: var(--group);
+  --icon-hover: color-mix(in srgb, var(--group) 70%, var(--text));
+  --title: color-mix(in srgb, var(--group) 16%, var(--text));
+  --title-hover: color-mix(in srgb, var(--group) 55%, var(--text));
+  --card-hover-border: color-mix(in srgb, var(--group) 55%, var(--border));
+}
+
+/* Heading: group colour for the label and its icon */
+.grid-group[data-group] h2 { color: var(--group); }
+.grid-group[data-group] h2 .app-icon { color: inherit; }
+
+/* Cards: a subtle tone shift between neighbouring icons keeps a group coordinated but not flat */
+.grid-group[data-group] .cat-grid li:nth-child(3n + 2) { --icon: color-mix(in srgb, var(--group) 82%, white); }
+.grid-group[data-group] .cat-grid li:nth-child(3n) { --icon: color-mix(in srgb, var(--group) 85%, var(--bg)); }
+
+.grid-group[data-group] .cat-name { color: var(--title); transition: color .15s; }
+.grid-group[data-group] .cat-name .app-icon { color: var(--icon); font-size: 1.05em; transition: color .15s, transform .15s; }
+
+.grid-group[data-group] .cat-cell:hover { border-color: var(--card-hover-border); }
+.grid-group[data-group] .cat-cell:hover .cat-name { color: var(--title-hover); }
+.grid-group[data-group] .cat-cell:hover .cat-name .app-icon { color: var(--icon-hover); transform: scale(1.12); }
+.grid-group[data-group] .cat-cell:focus-visible { outline-color: var(--group); }
+
+@media (prefers-reduced-motion: reduce) {
+  .grid-group[data-group] .cat-name,
+  .grid-group[data-group] .cat-name .app-icon { transition: none; }
+  .grid-group[data-group] .cat-cell:hover .cat-name .app-icon { transform: none; }
+}

@@ -24,7 +24,7 @@
 .dial-knob { fill: var(--accent); }
 .dial-label { fill: var(--text); font-size: 11px; pointer-events: none; font-variant-numeric: tabular-nums; }
 .dial-label.inner { font-size: 9px; fill: var(--muted); }
-.dial-label.on { fill: #fff; font-weight: 700; }
+.dial-label.on { fill: var(--on-accent); font-weight: 700; }
 
 .ct-type { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; }
 .ct-type .uc-field { flex: 1 1 90px; }

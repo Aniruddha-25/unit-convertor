@@ -5,6 +5,18 @@
     <link rel="icon" href="data:," />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>unit-converter</title>
+    <script>
+      // Apply the saved theme (or the OS preference on a first visit) before the page paints, so there is no flash.
+      // Keep the storage key in sync with src/components/shared/ThemeToggle/theme.ts.
+      (function () {
+        var theme = 'light'
+        try {
+          var saved = localStorage.getItem('theme')
+          theme = saved === 'light' || saved === 'dark' ? saved : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        } catch (e) {}
+        document.documentElement.dataset.theme = theme
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

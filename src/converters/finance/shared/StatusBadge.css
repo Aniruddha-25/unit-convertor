@@ -1,4 +1,4 @@
 .status-badge { padding: 2px 10px; border-radius: 999px; font-weight: 700; font-size: .8rem; border: 1px solid currentColor; }
-.status-live { color: #15803d; }
-.status-offline { color: #b45309; }
+.status-live { color: var(--success); }
+.status-offline { color: var(--warning); }
 .status-none { color: var(--muted); }

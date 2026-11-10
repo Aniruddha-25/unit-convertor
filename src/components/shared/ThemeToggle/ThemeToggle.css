@@ -1,0 +1,31 @@
+/* Pill switch. Colours come from the --toggle-* tokens in index.css, so both themes are defined in one place. */
+.theme-toggle {
+  --w: 60px; --h: 32px; --pad: 3px; --thumb: 24px;
+  position: relative; flex: none; width: var(--w); height: var(--h); padding: 0; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--toggle-border); background: var(--toggle-track);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, .18), 0 1px 2px rgba(0, 0, 0, .12);
+  transition: background-color .25s ease, border-color .25s ease;
+}
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.theme-thumb {
+  position: absolute; top: 50%; left: calc(var(--pad) - 1px); width: var(--thumb); height: var(--thumb); border-radius: 50%;
+  display: grid; place-items: center; background: var(--toggle-thumb); color: var(--toggle-icon);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .35);
+  transform: translateY(-50%);
+  transition: transform .25s cubic-bezier(.4, 0, .2, 1), background-color .25s ease;
+}
+/* Dark theme: the thumb sits at the right end */
+.theme-toggle[aria-checked='true'] .theme-thumb {
+  transform: translate(calc(var(--w) - var(--thumb) - var(--pad) * 2), -50%);
+}
+
+/* Both icons share the thumb; the one for the current theme fades in */
+.theme-thumb .app-icon { grid-area: 1 / 1; margin: 0; font-size: 13px; color: inherit; transition: opacity .2s ease, transform .25s ease; }
+.theme-thumb .app-icon:last-child { opacity: 0; transform: rotate(-40deg) scale(.6); }
+.theme-toggle[aria-checked='true'] .theme-thumb .app-icon:first-child { opacity: 0; transform: rotate(40deg) scale(.6); }
+.theme-toggle[aria-checked='true'] .theme-thumb .app-icon:last-child { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle, .theme-thumb, .theme-thumb .app-icon { transition: none; }
+}

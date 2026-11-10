@@ -3,6 +3,7 @@ import CategoryGrid from './components/layout/CategoryGrid.tsx'
 import ComingSoon from './components/layout/ComingSoon.tsx'
 import ErrorBoundary from './components/layout/ErrorBoundary.tsx'
 import Modal from './components/layout/Modal.tsx'
+import ThemeToggle from './components/shared/ThemeToggle/ThemeToggle.tsx'
 import ConverterView from './components/shared/ConverterView/ConverterView.tsx'
 import { categories, categoryGroups } from './config/categories.ts'
 import './App.css'
@@ -14,8 +15,11 @@ export default function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>Unit Converter</h1>
-        <p>Choose a category to start converting.</p>
+        <div>
+          <h1>Unit Converter</h1>
+          <p>Choose a category to start converting.</p>
+        </div>
+        <ThemeToggle />
       </header>
       <main className="content">
         <CategoryGrid groups={categoryGroups} categories={categories} onSelect={setSelectedId} />
