@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { FINENESS_MAX, finenessToKarat, findPurity, goldPercent, parseFineness, pureGoldGrams, purities, purityBreakdown } from './purity.ts'
+import { FINENESS_MAX, purityPercentLabel, finenessToKarat, findPurity, goldPercent, parseFineness, pureGoldGrams, purities, purityBreakdown } from './purity.ts'
 import { parseInput } from '../../utils/conversionUtils.ts'
 
 const close = (a: number, b: number, eps = 1e-9) => assert.ok(Math.abs(a - b) <= eps * Math.max(1, Math.abs(b)), `${a} !~ ${b}`)
@@ -87,4 +87,20 @@ test('weight input validation (shared parser): invalid and negative rejected, ze
   assert.equal(parseInput('', false).kind, 'empty')
   assert.deepEqual(parseInput('0', false), { kind: 'ok', value: 0 })
   assert.deepEqual(parseInput('10.5', false), { kind: 'ok', value: 10.5 })
+})
+
+test('dropdown shows purity percentages, mapped to the exact fineness and karat', () => {
+  assert.deepEqual(purities.map(purityPercentLabel), ['99.9%', '91.6%', '83.3%', '75%', '58.5%', '37.5%'])
+  const byLabel = new Map(purities.map((p) => [purityPercentLabel(p), p]))
+  const expected: Array<[string, number, number]> = [
+    ['99.9%', 999, 24], ['91.6%', 916, 22], ['83.3%', 833, 20], ['75%', 750, 18], ['58.5%', 585, 14], ['37.5%', 375, 9],
+  ]
+  for (const [label, fineness, karat] of expected) {
+    const p = byLabel.get(label)!
+    const b = purityBreakdown(10, 'g', p.fineness)
+    assert.equal(p.fineness, fineness)
+    assert.equal(b.karat, karat)
+    close(b.pureGrams, (10 * parseFloat(label)) / 100)
+    close(b.pureGrams + b.alloyGrams, 10)
+  }
 })

@@ -8,6 +8,7 @@ export const categoryGroups: readonly CategoryGroup[] = [
   { id: 'energy', name: 'Energy & Electrical' },
   { id: 'datetime', name: 'Date & Time' },
   { id: 'digital', name: 'Digital & Computing' },
+  { id: 'finance', name: 'Finance' },
   { id: 'lifestyle', name: 'Everyday & Lifestyle' },
 ]
 
@@ -61,28 +62,22 @@ export const categories: readonly CategoryConfig[] = [
   // Digital & Computing
   soon({ id: 'data-storage', name: 'Data Storage', groupId: 'digital' }),
   soon({ id: 'data-rate', name: 'Data Transfer Rate', groupId: 'digital' }),
-  // Everyday & Lifestyle
+  // Finance
   {
     id: 'currency',
     name: 'Currency',
-    groupId: 'lifestyle',
+    groupId: 'finance',
     description: 'Convert between world currencies using the latest exchange rates.',
     status: 'available',
   },
   {
-    id: 'gold-rate',
-    name: 'Gold Rate',
-    groupId: 'lifestyle',
-    description: 'Live gold prices by purity, with the value of any weight at the spot price.',
+    id: 'gold',
+    name: 'Gold Converter',
+    groupId: 'finance',
+    description: 'Live gold rates, plus pure gold and alloy content by weight and purity.',
     status: 'available',
   },
-  {
-    id: 'gold-purity',
-    name: 'Gold Purity',
-    groupId: 'lifestyle',
-    description: 'Find the pure gold and other metals in gold from its karat or fineness.',
-    status: 'available',
-  },
+  // Everyday & Lifestyle
   soon({ id: 'fuel-economy', name: 'Fuel Economy', groupId: 'lifestyle' }),
   soon({ id: 'cooking', name: 'Cooking Measurements', groupId: 'lifestyle' }),
   soon({ id: 'shoe-size', name: 'Shoe Size', groupId: 'lifestyle', description: 'Shoe size conversion is a future feature.' }),

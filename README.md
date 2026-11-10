@@ -17,6 +17,7 @@ flowchart LR
     A --> E["Energy & Electrical"]
     A --> F["Date & Time"]
     A --> G["Digital & Computing"]
+    A --> I["Finance"]
     A --> H["Everyday & Lifestyle"]
 
     B --> B1["Length"]
@@ -44,13 +45,11 @@ flowchart LR
     G --> G1["Data Storage"]
     G --> G2["Data Transfer Rate"]
 
-    H --> H0["Currency"]
-    H --> H4["Gold Rate"]
-    H4 --> H4a["Live Spot Price<br/>(24K / 22K / 18K)"]
-    H4 --> H4b["Gold Weight / Value"]
-    H --> H5["Gold Purity"]
-    H5 --> H5a["Karat / Fineness"]
-    H5 --> H5b["Pure Gold Content"]
+    I --> I1["Currency"]
+    I --> I2["Gold Converter"]
+    I2 --> I2a["Gold Rate<br/>(Live spot price)"]
+    I2 --> I2b["Gold Purity<br/>(Pure gold content)"]
+
     H --> H1["Fuel Economy"]
     H --> H2["Cooking Measurements"]
     H --> H3["Shoe Size"]
@@ -62,6 +61,7 @@ flowchart LR
     classDef energy fill:#ffedd5,stroke:#ea580c,color:#7c2d12
     classDef datetime fill:#fef3c7,stroke:#d97706,color:#78350f
     classDef digital fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef finance fill:#fce7f3,stroke:#db2777,color:#831843
     classDef lifestyle fill:#f3e8ff,stroke:#9333ea,color:#581c87
   
 
@@ -72,7 +72,8 @@ flowchart LR
     class E,E1,E2,E3 energy
     class F,F1,F2,F3,F4 datetime
     class G,G1,G2 digital
-    class H,H0,H1,H2,H3,H4,H4a,H4b,H5,H5a,H5b lifestyle
+    class I,I1,I2,I2a,I2b finance
+    class H,H1,H2,H3 lifestyle
 ```
 
 ## Tech Stack

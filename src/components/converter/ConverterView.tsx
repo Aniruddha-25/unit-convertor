@@ -2,8 +2,7 @@ import { lazy, Suspense, type ComponentType } from 'react'
 import type { CategoryConfig, ConverterConfig } from '../../types/converter.ts'
 import TimeConverter from './TimeConverter.tsx'
 import TimeZoneConverter from './TimeZoneConverter.tsx'
-const GoldRateConverter = lazy(() => import('./GoldRateConverter.tsx'))
-const GoldPurityConverter = lazy(() => import('./GoldPurityConverter.tsx'))
+const GoldConverter = lazy(() => import('./GoldConverter.tsx'))
 const CurrencyConverter = lazy(() => import('./CurrencyConverter.tsx'))
 import UnitConverter from './UnitConverter.tsx'
 
@@ -15,8 +14,7 @@ const customConfigViews: Record<string, ComponentType<{ config: ConverterConfig 
 /** Categories with their own self-contained UI (no unit table). */
 const standaloneViews: Record<string, ComponentType> = {
   'time-zone': TimeZoneConverter,
-  'gold-rate': GoldRateConverter,
-  'gold-purity': GoldPurityConverter,
+  gold: GoldConverter,
   currency: CurrencyConverter,
 }
 
