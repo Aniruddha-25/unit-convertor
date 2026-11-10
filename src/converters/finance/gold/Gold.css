@@ -2,6 +2,7 @@
 .gc-inputs .uc-field { margin: 0; }
 .gc-results { display: grid; grid-template-columns: 1fr 1fr; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--border); }
 .gc-col { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.gc-copy { display: flex; margin-top: 4px; }
 .gc-col + .gc-col { padding-left: 24px; border-left: 1px solid var(--border); }
 .gc-k { color: var(--muted); font-size: .8rem; font-weight: 600; }
 .gc-v { font-size: 1.6rem; font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; }

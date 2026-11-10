@@ -15,4 +15,6 @@ export const timeConverter: ConverterConfig = {
   defaultToUnit: 'min',
   convert: convertTime,
   allowNegative: true,
+  // "Months (average)" -> "months", "Years (Julian)" -> "years"
+  copyUnit: (u) => u.name.replace(/\s*\(.*\)/, '').toLowerCase(),
 }

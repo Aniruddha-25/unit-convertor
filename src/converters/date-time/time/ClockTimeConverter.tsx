@@ -43,7 +43,6 @@ export default function ClockTimeConverter() {
             <div className="ct-line">
               <span className="uc-result-eq">12-hour</span>
               <span className="uc-result-value">{format12(result.time)}</span>
-              <CopyButton text={format12(result.time)} />
             </div>
           </>
         ) : (

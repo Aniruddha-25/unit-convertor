@@ -242,7 +242,7 @@ export default function TimeZoneConverter() {
       </div>
 
       <div className="uc-actions">
-        {targetView && <CopyButton text={formatIso8601(targetView)} label="Copy converted time" />}
+        {targetView && <CopyButton text={formatIso8601(targetView)} />}
         <button type="button" className="uc-clear" onClick={reset}>
           Reset
         </button>

@@ -4,7 +4,7 @@ import { OUTDATED_AFTER_MS, convertAmount, formatAmount } from './currencyMath.t
 import { parseInput } from '../../../utils/conversionUtils.ts'
 import { categoryIcons } from '../../../components/shared/categoryIcons/categoryIcons.ts'
 import AppIcon from '../../../components/shared/AppIcon/AppIcon.tsx'
-import CopyButton from '../../../components/shared/CopyButton/CopyButton.tsx'
+import CurrencyCopyButton from '../../../components/shared/CurrencyCopyButton/CurrencyCopyButton.tsx'
 import CurrencyCombobox from './CurrencyCombobox.tsx'
 import { formatProviderTime, isProviderOutdated } from '../shared/status.ts'
 import StatusBadge from '../shared/StatusBadge.tsx'
@@ -110,7 +110,7 @@ export default function CurrencyConverter() {
 
         <div className="uc-actions">
           {computed?.ok && (
-            <CopyButton text={computed.value.toFixed(to.decimals).replace(/(\.\d*?)0+$/, '$1').replace(/\.$/, '')} label="Copy result" />
+            <CurrencyCopyButton amount={computed.value} currencyCode={to.code} decimals={resultDecimals(computed.value, to.decimals)} />
           )}
           <button type="button" className="uc-clear" onClick={() => setInput('')}>
             Clear

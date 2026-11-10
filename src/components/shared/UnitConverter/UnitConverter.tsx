@@ -115,7 +115,7 @@ export default function UnitConverter({ config, showHeader = true }: Props) {
       </div>
 
       <div className="uc-actions">
-        {result && parsed.kind === 'ok' && <CopyButton text={result.replace(/,/g, '')} label="Copy result" />}
+        {result && parsed.kind === 'ok' && <CopyButton text={config.copyUnit ? `${result} ${config.copyUnit(to)}` : result.replace(/,/g, '')} />}
         <button type="button" className="uc-clear" onClick={reset}>
           Clear
         </button>

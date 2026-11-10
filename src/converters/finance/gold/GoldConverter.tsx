@@ -9,6 +9,7 @@ import { findPurity, purities, purityBreakdown, purityOptionLabel } from './puri
 import { weightUnits } from './weight.ts'
 import { formatCompact, formatNumber, parseInput } from '../../../utils/conversionUtils.ts'
 import AppIcon from '../../../components/shared/AppIcon/AppIcon.tsx'
+import CurrencyCopyButton from '../../../components/shared/CurrencyCopyButton/CurrencyCopyButton.tsx'
 import CurrencyCombobox from '../currency/CurrencyCombobox.tsx'
 import { useExchangeRates } from '../currency/useExchangeRates.ts'
 import { useGoldPrice } from './useGoldPrice.ts'
@@ -125,6 +126,9 @@ export default function GoldConverter() {
               </span>
               <span className="gc-sub">
                 {fmt(perGram!)} {currency.code} per gram · {purity.label}
+              </span>
+              <span className="gc-copy">
+                <CurrencyCopyButton amount={value} currencyCode={currency.code} decimals={currency.decimals} />
               </span>
             </>
           ) : gold.snapshot ? (

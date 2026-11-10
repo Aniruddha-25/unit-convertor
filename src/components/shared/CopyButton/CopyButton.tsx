@@ -29,7 +29,7 @@ interface Props {
   className?: string
 }
 
-export default function CopyButton({ text, label = 'Copy', className = 'uc-clear' }: Props) {
+export default function CopyButton({ text, label = 'Copy Value', className = 'uc-clear' }: Props) {
   const [state, setState] = useState<'idle' | 'copied' | 'failed'>('idle')
   const timer = useRef<number | undefined>(undefined)
   useEffect(() => () => window.clearTimeout(timer.current), [])
@@ -43,7 +43,7 @@ export default function CopyButton({ text, label = 'Copy', className = 'uc-clear
   return (
     <>
       <button type="button" className={className} onClick={onClick}>
-        {state === 'copied' ? 'Copied ✓' : state === 'failed' ? 'Copy failed' : label}
+        {state === 'copied' ? 'Copied!' : state === 'failed' ? 'Copy failed' : label}
       </button>
       <span className="sr-only" role="status">
         {state === 'copied' ? 'Copied to clipboard' : state === 'failed' ? 'Copy failed' : ''}

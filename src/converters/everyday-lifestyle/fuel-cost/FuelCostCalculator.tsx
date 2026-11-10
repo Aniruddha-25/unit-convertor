@@ -2,6 +2,7 @@ import { useId, useState } from 'react'
 import AppIcon from '../../../components/shared/AppIcon/AppIcon.tsx'
 import { categoryIcons } from '../../../components/shared/categoryIcons/categoryIcons.ts'
 import '../../../components/shared/converter.css'
+import CurrencyCopyButton from '../../../components/shared/CurrencyCopyButton/CurrencyCopyButton.tsx'
 import { formatNumber } from '../../../utils/conversionUtils.ts'
 import CurrencyCombobox from '../../finance/currency/CurrencyCombobox.tsx'
 import { buildCurrencyList } from '../../finance/currency/currencyData.ts'
@@ -88,6 +89,12 @@ export default function FuelCostCalculator() {
           </span>
         )}
       </div>
+
+      {result && (
+        <div className="uc-actions">
+          <CurrencyCopyButton amount={result.totalCost} currencyCode={currency.code} decimals={currency.decimals} />
+        </div>
+      )}
 
       {result && (
         <dl className="fc-facts">

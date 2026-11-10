@@ -48,4 +48,5 @@ export const fuelEconomyConverter: ConverterConfig = {
   validate: (value) => validateFuelEconomy(value),
   allowNegative: false,
   displayDigits: 6,
+  copyUnit: (u) => u.symbol,
 }
