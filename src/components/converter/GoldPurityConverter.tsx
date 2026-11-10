@@ -7,7 +7,6 @@ import AppIcon from '../layout/AppIcon.tsx'
 import CopyButton from './CopyButton.tsx'
 import Segmented from './Segmented.tsx'
 import './UnitConverter.css'
-import './TimeConverter.css'
 import './Gold.css'
 
 type Mode = 'karat' | 'fineness'

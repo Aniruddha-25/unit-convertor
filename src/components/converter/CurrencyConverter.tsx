@@ -8,9 +8,8 @@ import { categoryIcons } from '../../config/categoryIcons.ts'
 import AppIcon from '../layout/AppIcon.tsx'
 import CopyButton from './CopyButton.tsx'
 import CurrencyCombobox from './CurrencyCombobox.tsx'
-import { useExchangeRates } from './useExchangeRates.ts'
+import { useExchangeRates } from './useLiveData.ts'
 import './UnitConverter.css'
-import './TimeZoneConverter.css'
 import './CurrencyConverter.css'
 
 const STATUS_LABEL: Record<RateStatus, string> = { live: 'Live', cached: 'Cached', outdated: 'Outdated' }

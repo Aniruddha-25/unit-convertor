@@ -78,10 +78,3 @@ export function formatAmount(value: number, decimals: number, locale?: string): 
 export function formatTimestamp(ms: number, timeZone?: string, locale?: string): string {
   return new Intl.DateTimeFormat(locale, { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short', timeZone }).format(ms)
 }
-
-export function timeZoneLabel(timeZone: string, at: number, locale?: string): string {
-  const part = new Intl.DateTimeFormat(locale, { timeZone, timeZoneName: 'short' })
-    .formatToParts(at)
-    .find((p) => p.type === 'timeZoneName')
-  return part ? `${timeZone} (${part.value})` : timeZone
-}

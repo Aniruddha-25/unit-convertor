@@ -1,18 +1,7 @@
 .tz-hint { margin: 8px 0 0; color: var(--muted); font-size: .85rem; }
-.tz-h { margin: 22px 0 10px; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
 .tz-zones { flex-direction: column; align-items: stretch; gap: 0; }
 .tz-zones .uc-swap { align-self: center; margin: -4px 0 12px; transform: rotate(90deg); }
 .uc input[type="date"] { min-height: 44px; }
-
-.zc { position: relative; }
-.zc-list { position: absolute; z-index: 20; top: 100%; left: 0; right: 0; margin: 2px 0 0; padding: 4px; list-style: none; max-height: 260px; overflow-y: auto; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); box-shadow: 0 8px 24px rgba(0, 0, 0, .18); }
-.zc-opt { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; cursor: pointer; }
-.zc-opt.active { background: var(--accent-soft); }
-.zc-opt.sel .zc-main { font-weight: 700; }
-.zc-main { display: flex; flex-direction: column; min-width: 0; overflow-wrap: anywhere; }
-.zc-sub { color: var(--muted); font-size: .78rem; }
-.zc-off { flex: none; color: var(--muted); font-size: .8rem; font-variant-numeric: tabular-nums; }
-.zc-empty { padding: 10px; color: var(--muted); }
 
 .tz-dst { margin: 0 0 16px; padding: 12px 14px; border: 1px solid var(--accent); border-radius: 10px; background: var(--accent-soft); }
 .tz-dst legend { padding: 0 6px; font-weight: 700; }
@@ -71,7 +60,6 @@
 @media (prefers-reduced-motion: reduce) {
   .pop, .tz-time { transition: none; }
 }
-
 
 @media (max-width: 520px) {
   .tz-time-main { font-size: 1.25rem; }
