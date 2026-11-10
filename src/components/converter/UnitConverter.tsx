@@ -1,6 +1,8 @@
 import { useId, useMemo, useState } from 'react'
 import type { ConverterConfig } from '../../types/converter.ts'
 import { findUnit, formatNumber, parseInput } from '../../utils/conversionUtils.ts'
+import { categoryIcons } from '../../config/categoryIcons.ts'
+import AppIcon from '../layout/AppIcon.tsx'
 import CopyButton from './CopyButton.tsx'
 import './UnitConverter.css'
 
@@ -58,7 +60,10 @@ export default function UnitConverter({ config, showHeader = true }: Props) {
     <section className="uc" aria-labelledby={showHeader ? `${uid}-title` : undefined} aria-label={showHeader ? undefined : `${config.title} (duration)`}>
       {showHeader && (
         <>
-          <h2 id={`${uid}-title`}>{config.title}</h2>
+          <h2 id={`${uid}-title`}>
+            <AppIcon icon={categoryIcons[config.id]} />
+            {config.title}
+          </h2>
           <p className="uc-desc">{config.description}</p>
         </>
       )}

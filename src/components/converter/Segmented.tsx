@@ -1,4 +1,8 @@
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
+import AppIcon from '../layout/AppIcon.tsx'
+
 interface Option<T extends string> {
+  icon?: IconDefinition
   value: T
   label: string
 }
@@ -22,6 +26,7 @@ export default function Segmented<T extends string>({ label, options, value, onC
           aria-pressed={o.value === value}
           onClick={() => onChange(o.value)}
         >
+          <AppIcon icon={o.icon} />
           {o.label}
         </button>
       ))}

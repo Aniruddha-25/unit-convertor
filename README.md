@@ -73,6 +73,8 @@ flowchart LR
 
 - React 19 + TypeScript
 - Vite
+- `country-data-list` (ISO 4217 currency metadata) and `flag-icons` (country flags)
+- ExchangeRate-API open endpoint for live currency rates (no API key needed)
 - ESLint, Node test runner
 
 ## Getting Started

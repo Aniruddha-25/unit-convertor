@@ -1,6 +1,5 @@
 import type { CategoryConfig, CategoryGroup } from '../types/converter.ts'
 import { timeConverter } from '../converters/time/timeConverter.ts'
-import { currencyConverter } from '../converters/currency/currencyConverter.ts'
 
 export const categoryGroups: readonly CategoryGroup[] = [
   { id: 'basic', name: 'Basic Measurements' },
@@ -67,9 +66,8 @@ export const categories: readonly CategoryConfig[] = [
     id: 'currency',
     name: 'Currency',
     groupId: 'lifestyle',
-    description: currencyConverter.description,
+    description: 'Convert between world currencies using the latest exchange rates.',
     status: 'available',
-    converter: currencyConverter,
   },
   soon({ id: 'fuel-economy', name: 'Fuel Economy', groupId: 'lifestyle' }),
   soon({ id: 'cooking', name: 'Cooking Measurements', groupId: 'lifestyle' }),

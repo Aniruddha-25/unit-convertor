@@ -58,3 +58,8 @@
   .modal { padding: 24px 16px 16px; max-height: calc(100dvh - 16px); }
 }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* Font Awesome icons: one size, inherits text color, sits on the text baseline */
+.app-icon { margin-right: .5em; font-size: .9em; color: var(--muted); }
+.cat-name .app-icon { color: var(--accent); }
+.seg-btn .app-icon { margin-right: .4em; color: inherit; }

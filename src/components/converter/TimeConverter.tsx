@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import type { ConverterConfig } from '../../types/converter.ts'
 import ClockTimeConverter from './ClockTimeConverter.tsx'
+import { categoryIcons } from '../../config/categoryIcons.ts'
+import { faHourglassHalf, faClock } from '@fortawesome/free-solid-svg-icons'
+import AppIcon from '../layout/AppIcon.tsx'
 import Segmented from './Segmented.tsx'
 import UnitConverter from './UnitConverter.tsx'
 import './UnitConverter.css'
@@ -14,7 +17,10 @@ export default function TimeConverter({ config }: { config: ConverterConfig }) {
 
   return (
     <section className="uc tc" aria-label={config.title}>
-      <h2>{config.title}</h2>
+      <h2>
+        <AppIcon icon={categoryIcons[config.id]} />
+        {config.title}
+      </h2>
       <p className="uc-desc">
         {mode === 'duration' ? config.description : 'Pick or type a time of day and see it in 12-hour and 24-hour form.'}
       </p>
@@ -24,8 +30,8 @@ export default function TimeConverter({ config }: { config: ConverterConfig }) {
           value={mode}
           onChange={setMode}
           options={[
-            { value: 'duration', label: 'Duration' },
-            { value: 'clock', label: 'Clock time' },
+            { value: 'duration', label: 'Duration', icon: faHourglassHalf },
+            { value: 'clock', label: 'Clock time', icon: faClock },
           ]}
         />
       </div>

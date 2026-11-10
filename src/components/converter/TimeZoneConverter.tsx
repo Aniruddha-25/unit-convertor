@@ -15,6 +15,8 @@ import {
   type LocalDateTime,
   type ZoneView,
 } from '../../converters/timezone/timeZoneUtils.ts'
+import { categoryIcons } from '../../config/categoryIcons.ts'
+import AppIcon from '../layout/AppIcon.tsx'
 import Popover from '../layout/Popover.tsx'
 import ClockTimeInput from './ClockTimeInput.tsx'
 import CopyButton from './CopyButton.tsx'
@@ -184,7 +186,10 @@ export default function TimeZoneConverter() {
 
   return (
     <section className="uc tc tz" aria-label="Time Zone Converter">
-      <h2>Time Zone Converter</h2>
+      <h2>
+        <AppIcon icon={categoryIcons['time-zone']} />
+        Time Zone Converter
+      </h2>
       <p className="uc-desc">Convert a date and time between two time zones.</p>
 
       <div className="uc-units tz-zones">
