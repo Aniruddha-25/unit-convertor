@@ -4,6 +4,7 @@ import { findUnit, formatNumber, parseInput } from '../../../utils/conversionUti
 import { categoryIcons } from '../categoryIcons/categoryIcons.ts'
 import AppIcon from '../AppIcon/AppIcon.tsx'
 import CopyButton from '../CopyButton/CopyButton.tsx'
+import UnitCombobox from './UnitCombobox.tsx'
 import '../converter.css'
 
 interface Props {
@@ -45,7 +46,10 @@ export default function UnitConverter({ config, showHeader = true }: Props) {
     setToId(config.defaultToUnit)
   }
 
-  const unitSelect = (id: string, value: string, onChange: (v: string) => void, label: string) => (
+  const unitSelect = (id: string, value: string, onChange: (v: string) => void, label: string) =>
+    config.searchableUnits ? (
+      <UnitCombobox label={label} value={findUnit(config.units, value)} units={config.units} onChange={onChange} />
+    ) : (
     <div className="uc-field">
       <label htmlFor={id}>{label}</label>
       <select id={id} value={value} onChange={(e) => onChange(e.target.value)}>

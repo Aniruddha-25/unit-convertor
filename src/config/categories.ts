@@ -1,5 +1,7 @@
 import type { CategoryConfig, CategoryGroup } from '../types/converter.ts'
 import { fuelEconomyConverter } from '../converters/motion-mechanics/fuel-economy/fuelEconomy.ts'
+import { dataRateConverter } from '../converters/digital-computing/data-rate/dataRate.ts'
+import { dataStorageConverter } from '../converters/digital-computing/data-storage/dataStorage.ts'
 import { timeConverter } from '../converters/date-time/time/timeConverter.ts'
 
 export const categoryGroups: readonly CategoryGroup[] = [
@@ -69,8 +71,22 @@ export const categories: readonly CategoryConfig[] = [
   },
   soon({ id: 'date-difference', name: 'Date Difference', groupId: 'datetime', description: 'Date difference calculation is a future feature.' }),
   // Digital & Computing
-  soon({ id: 'data-storage', name: 'Data Storage', groupId: 'digital' }),
-  soon({ id: 'data-rate', name: 'Data Transfer Rate', groupId: 'digital' }),
+  {
+    id: 'data-storage',
+    name: 'Data Storage',
+    groupId: 'digital',
+    description: dataStorageConverter.description,
+    status: 'available',
+    converter: dataStorageConverter,
+  },
+  {
+    id: 'data-rate',
+    name: 'Data Transfer Rate',
+    groupId: 'digital',
+    description: dataRateConverter.description,
+    status: 'available',
+    converter: dataRateConverter,
+  },
   // Finance
   {
     id: 'currency',

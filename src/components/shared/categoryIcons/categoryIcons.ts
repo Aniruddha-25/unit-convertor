@@ -1,8 +1,8 @@
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import {
-  faBolt, faCalendar, faCalendarWeek, faCarBattery, faClock, faCoins, faSackDollar, faCube, faDownLeftAndUpRightToCenter,
-  faEarthAmericas, faExpand, faFileInvoiceDollar, faGasPump, faGaugeHigh, faGears, faHandFist, faHardDrive, faHourglassHalf,
-  faHouse, faLayerGroup, faMicrochip, faPlug, faRightLeft, faRuler, faRulerCombined, faScaleBalanced,
+  faBolt, faCalendar, faCalendarWeek, faCarBattery, faClock, faCoins, faCompassDrafting, faSackDollar, faCube, faDownLeftAndUpRightToCenter,
+  faEarthAmericas, faExpand, faFloppyDisk, faGasPump, faGaugeHigh, faGears, faHandFist, faHourglassHalf,
+  faHouse, faLayerGroup, faMicrochip, faOilWell, faPlug, faRightLeft, faRuler, faScaleBalanced,
   faShapes, faShoePrints, faTemperatureHalf, faUtensils, faWaveSquare, faWallet, faWeightHanging,
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -13,7 +13,7 @@ export const categoryIcons: Readonly<Record<string, IconDefinition>> = {
   volume: faCube,
   mass: faWeightHanging,
   temperature: faTemperatureHalf,
-  angle: faRulerCombined,
+  angle: faCompassDrafting,
   density: faLayerGroup,
   speed: faGaugeHigh,
   force: faHandFist,
@@ -25,12 +25,12 @@ export const categoryIcons: Readonly<Record<string, IconDefinition>> = {
   'time-duration': faHourglassHalf,
   'time-zone': faEarthAmericas,
   'date-difference': faCalendarWeek,
-  'data-storage': faHardDrive,
+  'data-storage': faFloppyDisk,
   'data-rate': faRightLeft,
   currency: faSackDollar,
   gold: faCoins,
-  'fuel-economy': faGasPump,
-  'fuel-cost': faFileInvoiceDollar,
+  'fuel-economy': faOilWell,
+  'fuel-cost': faGasPump,
   cooking: faUtensils,
   'shoe-size': faShoePrints,
 }

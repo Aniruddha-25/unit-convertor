@@ -22,6 +22,8 @@ export interface ConverterConfig {
   validate?: (value: number, fromUnitId: string) => string | null
   /** Significant digits shown in results (default 12). */
   displayDigits?: number
+  /** Use searchable From/To pickers instead of plain selects (for long unit lists). */
+  searchableUnits?: boolean
   /** When set, Copy yields the displayed result plus this unit label (e.g. "45 seconds"); otherwise just the number. */
   copyUnit?: (unit: UnitDefinition) => string
 }
