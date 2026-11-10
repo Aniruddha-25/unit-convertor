@@ -41,6 +41,7 @@ export async function fetchGold(signal?: AbortSignal): Promise<GoldSnapshot> {
     if (signal?.aborted) throw e
     if (controller.signal.aborted) throw new Error('The gold price service timed out.', { cause: e })
     if (e instanceof TypeError) throw new Error('Could not reach the gold price service (offline?).', { cause: e })
+    if (e instanceof SyntaxError) throw new Error('The gold price service returned an unreadable response.', { cause: e })
     throw e
   } finally {
     clearTimeout(timer)

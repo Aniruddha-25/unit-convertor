@@ -44,6 +44,7 @@ export async function fetchRates(signal?: AbortSignal): Promise<RateSnapshot> {
     if (signal?.aborted) throw e
     if (controller.signal.aborted) throw new Error('The rate service timed out.', { cause: e })
     if (e instanceof TypeError) throw new Error('Could not reach the rate service (offline?).', { cause: e })
+    if (e instanceof SyntaxError) throw new Error('The rate service returned an unreadable response.', { cause: e })
     throw e
   } finally {
     clearTimeout(timer)

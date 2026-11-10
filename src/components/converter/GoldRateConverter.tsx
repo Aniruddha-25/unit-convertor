@@ -96,9 +96,9 @@ export default function GoldRateConverter() {
               : 'unavailable (not provided by the price service)'}
           </p>
         )}
-        {gold.error && (
+        {gold.error && gold.snapshot && (
           <p className="cc-warn" role="alert">
-            {gold.error} {gold.snapshot ? 'Showing the last saved price.' : ''}
+            {gold.error} Showing the last saved price.
           </p>
         )}
         {gold.status === 'outdated' && !gold.error && <p className="cc-warn">This gold price is more than 72 hours old.</p>}
