@@ -50,13 +50,13 @@ export function convertByFactor(
  * Uses up to 12 significant digits (doubles carry ~15-17), trims trailing
  * zeros, and switches to exponent notation for very large/small magnitudes.
  */
-export function formatNumber(value: number): string {
+export function formatNumber(value: number, digits = 12): string {
   if (value === 0) return '0'
   const abs = Math.abs(value)
   if (abs >= 1e15 || abs < 1e-6) {
-    return value.toExponential(9).replace(/\.?0+e/, 'e')
+    return value.toExponential(digits - 3).replace(/\.?0+e/, 'e')
   }
-  const rounded = Number(value.toPrecision(12))
+  const rounded = Number(value.toPrecision(digits))
   return rounded.toLocaleString('en-US', { maximumFractionDigits: 12, useGrouping: true })
 }
 

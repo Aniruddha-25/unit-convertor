@@ -3,7 +3,7 @@ import CategoryGrid from './components/layout/CategoryGrid.tsx'
 import ComingSoon from './components/layout/ComingSoon.tsx'
 import ErrorBoundary from './components/layout/ErrorBoundary.tsx'
 import Modal from './components/layout/Modal.tsx'
-import ConverterView from './components/converter/ConverterView.tsx'
+import ConverterView from './components/shared/ConverterView/ConverterView.tsx'
 import { categories, categoryGroups } from './config/categories.ts'
 import './App.css'
 

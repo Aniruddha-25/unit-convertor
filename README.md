@@ -47,10 +47,9 @@ flowchart LR
 
     I --> I1["Currency"]
     I --> I2["Gold Converter"]
-    I2 --> I2a["Gold Rate<br/>(Live spot price)"]
-    I2 --> I2b["Gold Purity<br/>(Pure gold content)"]
+  
+    I --> I3["Fuel Economy Converter"]
 
-    H --> H1["Fuel Economy"]
     H --> H2["Cooking Measurements"]
     H --> H3["Shoe Size"]
 
@@ -72,8 +71,8 @@ flowchart LR
     class E,E1,E2,E3 energy
     class F,F1,F2,F3,F4 datetime
     class G,G1,G2 digital
-    class I,I1,I2,I2a,I2b finance
-    class H,H1,H2,H3 lifestyle
+    class I,I1,I2,I3 finance
+    class H,H2,H3 lifestyle
 ```
 
 ## Tech Stack
@@ -83,7 +82,7 @@ flowchart LR
 - `country-data-list` (ISO 4217 currency metadata) and `flag-icons` (country flags)
 - ExchangeRate-API open endpoint for live currency rates and Gold-API for live spot gold (no API keys needed)
 - Font Awesome (`@fortawesome/*`) icons
-- ESLint, Node test runner
+- ESLint
 
 ## Getting Started
 
@@ -101,7 +100,6 @@ npm install
 | Production build | `npm run build`   |
 | Preview build    | `npm run preview` |
 | Lint             | `npm run lint`    |
-| Test             | `npm test`        |
 
 ## Deployment
 

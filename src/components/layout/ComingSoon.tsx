@@ -1,5 +1,5 @@
-import { categoryIcons } from '../../config/categoryIcons.ts'
-import AppIcon from './AppIcon.tsx'
+import { categoryIcons } from '../shared/categoryIcons/categoryIcons.ts'
+import AppIcon from '../shared/AppIcon/AppIcon.tsx'
 import type { CategoryConfig } from '../../types/converter.ts'
 
 export default function ComingSoon({ category }: { category: CategoryConfig }) {

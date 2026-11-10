@@ -1,0 +1,5 @@
+.status-badge { padding: 2px 10px; border-radius: 999px; font-weight: 700; font-size: .8rem; border: 1px solid currentColor; }
+.status-live { color: #15803d; }
+.status-cached { color: #b45309; }
+.status-outdated { color: var(--danger); }
+.status-none { color: var(--muted); }

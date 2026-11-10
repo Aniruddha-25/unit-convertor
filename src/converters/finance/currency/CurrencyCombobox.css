@@ -1,0 +1,4 @@
+.cc-flag { flex: none; width: 1.4em; height: 1.05em; border-radius: 2px; background-size: cover; box-shadow: 0 0 0 1px var(--border); }
+.cc-flag-none { display: inline-flex; align-items: center; justify-content: center; box-shadow: none; color: var(--muted); }
+.cc .zc-opt { justify-content: flex-start; }
+.cc .zc-main { flex: 1; }

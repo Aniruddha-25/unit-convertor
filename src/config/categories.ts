@@ -1,5 +1,6 @@
 import type { CategoryConfig, CategoryGroup } from '../types/converter.ts'
-import { timeConverter } from '../converters/time/timeConverter.ts'
+import { fuelEconomyConverter } from '../converters/finance/fuel-economy/fuelEconomy.ts'
+import { timeConverter } from '../converters/date-time/time/timeConverter.ts'
 
 export const categoryGroups: readonly CategoryGroup[] = [
   { id: 'basic', name: 'Basic Measurements' },
@@ -77,8 +78,15 @@ export const categories: readonly CategoryConfig[] = [
     description: 'Live gold rates, plus pure gold and alloy content by weight and purity.',
     status: 'available',
   },
+  {
+    id: 'fuel-economy',
+    name: 'Fuel Economy Converter',
+    groupId: 'finance',
+    description: fuelEconomyConverter.description,
+    status: 'available',
+    converter: fuelEconomyConverter,
+  },
   // Everyday & Lifestyle
-  soon({ id: 'fuel-economy', name: 'Fuel Economy', groupId: 'lifestyle' }),
   soon({ id: 'cooking', name: 'Cooking Measurements', groupId: 'lifestyle' }),
   soon({ id: 'shoe-size', name: 'Shoe Size', groupId: 'lifestyle', description: 'Shoe size conversion is a future feature.' }),
 ]

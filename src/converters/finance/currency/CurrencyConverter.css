@@ -1,0 +1,11 @@
+.cc-info { margin: 0 0 16px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-size: .85rem; }
+.cc-info-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.cc-refresh { padding: 4px 12px; font-size: .85rem; }
+.cc-refresh:disabled { opacity: .6; cursor: default; }
+.cc-warn { margin: 8px 0 0; color: var(--danger); }
+.cc-state { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 20px 0; color: var(--muted); }
+
+.cc-inputwrap { display: flex; align-items: center; gap: 8px; }
+.cc-inputwrap input { flex: 1; min-width: 0; }
+.cc-symbol { min-width: 1.6em; text-align: center; color: var(--muted); font-weight: 600; }
+.cc-updated { margin: 6px 0 0; color: var(--muted); }

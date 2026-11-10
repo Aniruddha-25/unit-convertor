@@ -18,6 +18,10 @@ export interface ConverterConfig {
   convert: (value: number, fromUnitId: string, toUnitId: string) => number
   /** Whether negative inputs are meaningful (default true). */
   allowNegative?: boolean
+  /** Reject an input before converting (e.g. zero); return the message to show, or null if it is fine. */
+  validate?: (value: number, fromUnitId: string) => string | null
+  /** Significant digits shown in results (default 12). */
+  displayDigits?: number
   /** Assumptions shown to the user under the converter. */
   notes?: readonly string[]
 }

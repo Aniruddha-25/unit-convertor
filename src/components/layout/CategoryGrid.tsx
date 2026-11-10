@@ -1,5 +1,5 @@
-import { categoryIcons, groupIcons } from '../../config/categoryIcons.ts'
-import AppIcon from './AppIcon.tsx'
+import { categoryIcons, groupIcons } from '../shared/categoryIcons/categoryIcons.ts'
+import AppIcon from '../shared/AppIcon/AppIcon.tsx'
 import type { CategoryConfig, CategoryGroup } from '../../types/converter.ts'
 
 interface Props {
