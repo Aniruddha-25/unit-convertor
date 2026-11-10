@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import CategoryGrid from './components/layout/CategoryGrid.tsx'
 import ComingSoon from './components/layout/ComingSoon.tsx'
+import ErrorBoundary from './components/layout/ErrorBoundary.tsx'
 import Modal from './components/layout/Modal.tsx'
 import ConverterView from './components/converter/ConverterView.tsx'
 import { categories, categoryGroups } from './config/categories.ts'
@@ -22,7 +23,9 @@ export default function App() {
       {selected && (
         <Modal label={`${selected.name} converter`} onClose={() => setSelectedId(null)}>
           {selected.status === 'available' ? (
-            <ConverterView category={selected} />
+            <ErrorBoundary key={selected.id}>
+              <ConverterView category={selected} />
+            </ErrorBoundary>
           ) : (
             <ComingSoon category={selected} />
           )}

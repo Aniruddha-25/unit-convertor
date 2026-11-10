@@ -59,3 +59,8 @@ export function formatNumber(value: number): string {
   const rounded = Number(value.toPrecision(12))
   return rounded.toLocaleString('en-US', { maximumFractionDigits: 12, useGrouping: true })
 }
+
+/** Compact display for derived values: 7 significant digits, grouped. Display only. */
+export function formatCompact(value: number): string {
+  return formatNumber(Number(value.toPrecision(7)))
+}

@@ -5,6 +5,7 @@ import {
   OUTDATED_AFTER_MS,
   convertAmount,
   formatAmount,
+  formatTimestamp,
   isCacheFresh,
   parseSnapshot,
   rateStatus,
@@ -75,4 +76,12 @@ test('formats amounts by minor units', () => {
   assert.equal(formatAmount(1234567.891, 2, 'en-US'), '1,234,567.89')
   assert.equal(formatAmount(1234.5, 0, 'en-US'), '1,235')
   assert.equal(formatAmount(0.00001234, 2, 'en-US'), '0.00001234')
+})
+
+test('formats provider timestamps in a given time zone with its abbreviation', () => {
+  const t = Date.UTC(2026, 10, 10, 6, 34, 31)
+  const text = formatTimestamp(t, 'Asia/Kolkata', 'en-US')
+  assert.match(text, /Nov 10, 2026/)
+  assert.match(text, /12:04/)
+  assert.match(text, /GMT\+5:30|IST/)
 })

@@ -76,7 +76,7 @@ export function formatAmount(value: number, decimals: number, locale?: string): 
 }
 
 export function formatTimestamp(ms: number, timeZone?: string, locale?: string): string {
-  return new Intl.DateTimeFormat(locale, { dateStyle: 'medium', timeStyle: 'short', timeZoneName: 'short', timeZone }).format(ms)
+  return new Intl.DateTimeFormat(locale, { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short', timeZone }).format(ms)
 }
 
 export function timeZoneLabel(timeZone: string, at: number, locale?: string): string {

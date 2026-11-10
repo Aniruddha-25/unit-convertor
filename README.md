@@ -45,6 +45,12 @@ flowchart LR
     G --> G2["Data Transfer Rate"]
 
     H --> H0["Currency"]
+    H --> H4["Gold Rate"]
+    H4 --> H4a["Live Spot Price<br/>(24K / 22K / 18K)"]
+    H4 --> H4b["Gold Weight / Value"]
+    H --> H5["Gold Purity"]
+    H5 --> H5a["Karat / Fineness"]
+    H5 --> H5b["Pure Gold Content"]
     H --> H1["Fuel Economy"]
     H --> H2["Cooking Measurements"]
     H --> H3["Shoe Size"]
@@ -66,7 +72,7 @@ flowchart LR
     class E,E1,E2,E3 energy
     class F,F1,F2,F3,F4 datetime
     class G,G1,G2 digital
-    class H,H0,H1,H2,H3 lifestyle
+    class H,H0,H1,H2,H3,H4,H4a,H4b,H5,H5a,H5b lifestyle
 ```
 
 ## Tech Stack
@@ -74,7 +80,8 @@ flowchart LR
 - React 19 + TypeScript
 - Vite
 - `country-data-list` (ISO 4217 currency metadata) and `flag-icons` (country flags)
-- ExchangeRate-API open endpoint for live currency rates (no API key needed)
+- ExchangeRate-API open endpoint for live currency rates and Gold-API for live spot gold (no API keys needed)
+- Font Awesome (`@fortawesome/*`) icons
 - ESLint, Node test runner
 
 ## Getting Started
