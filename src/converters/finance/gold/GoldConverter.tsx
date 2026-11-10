@@ -1,12 +1,11 @@
 import { useId, useMemo, useState } from 'react'
-import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons'
 import { categoryIcons } from '../../../components/shared/categoryIcons/categoryIcons.ts'
 import { buildCurrencyList } from '../currency/currencyData.ts'
 import { convertAmount, formatAmount } from '../currency/currencyMath.ts'
-import { formatProviderTime, worstStatus, type RateStatus } from '../shared/status.ts'
+import { combineStatus, formatProviderTime, isProviderOutdated, type LiveStatus } from '../shared/status.ts'
 import StatusBadge from '../shared/StatusBadge.tsx'
-import { usdPerGram } from './goldMath.ts'
-import { findPurity, purities, purityBreakdown, purityPercentLabel } from './purity.ts'
+import { GOLD_OUTDATED_AFTER_MS, usdPerGram } from './goldMath.ts'
+import { findPurity, purities, purityBreakdown, purityOptionLabel } from './purity.ts'
 import { weightUnits } from './weight.ts'
 import { formatCompact, formatNumber, parseInput } from '../../../utils/conversionUtils.ts'
 import AppIcon from '../../../components/shared/AppIcon/AppIcon.tsx'
@@ -54,13 +53,9 @@ export default function GoldConverter() {
   const value = contentOk && perGram !== null ? perGram * content.totalGrams : null
   const valueOk = value !== null && Number.isFinite(value)
 
-  const status: RateStatus | null =
-    gold.status === null ? null : currency && currency.code !== 'USD' && fx.status ? worstStatus(gold.status, fx.status) : gold.status
+  // The price is in USD, so converting to another currency also depends on the exchange rates.
+  const status: LiveStatus | null = currency && currency.code !== 'USD' ? combineStatus(gold.status, fx.status) : gold.status
   const loading = gold.loading || fx.loading
-  const refresh = () => {
-    gold.refresh()
-    fx.refresh()
-  }
   const weightError = parsed.kind === 'error' ? parsed.message : content && !contentOk ? 'The result is too large to represent.' : null
   const fmt = (v: number) => (currency ? formatAmount(v, currency.decimals) : String(v))
   const reset = () => {
@@ -107,7 +102,7 @@ export default function GoldConverter() {
           <select id={`${uid}-p`} value={purityId} onChange={(e) => setPurityId(e.target.value)}>
             {purities.map((p) => (
               <option key={p.id} value={p.id}>
-                {purityPercentLabel(p)}
+                {purityOptionLabel(p)}
               </option>
             ))}
           </select>
@@ -136,7 +131,13 @@ export default function GoldConverter() {
             <span className="gc-empty">{weightError ? 'Fix the weight to see a value.' : 'Enter a weight to see a value.'}</span>
           ) : (
             <span className="gc-empty" role={gold.error ? 'alert' : 'status'}>
-              {gold.loading ? 'Loading gold price…' : gold.error ?? 'No gold price available.'}
+              {gold.loading
+                ? 'Loading gold price…'
+                : gold.status === 'offline'
+                  ? "You're offline. The price will load when the connection returns."
+                  : gold.error
+                    ? `${gold.error} Retrying automatically.`
+                    : 'No gold price available.'}
             </span>
           )}
 
@@ -147,12 +148,12 @@ export default function GoldConverter() {
                 Updated {formatProviderTime(gold.snapshot.providerUpdatedAt)}
               </span>
             )}
-            <button type="button" className="gc-refresh" onClick={refresh} disabled={loading} aria-label="Refresh gold price" title="Refresh gold price">
-              <AppIcon icon={faArrowsRotate} />
-            </button>
+            {loading && gold.snapshot && <span>Updating…</span>}
           </span>
-          {gold.error && gold.snapshot && <span className="gc-warn">{gold.error} Showing the last saved price.</span>}
-          {gold.status === 'outdated' && !gold.error && <span className="gc-warn">This gold price is more than 72 hours old.</span>}
+          {gold.error && gold.snapshot && gold.status !== 'offline' && <span className="gc-warn">{gold.error} Showing the last saved price.</span>}
+          {gold.snapshot && !gold.error && isProviderOutdated(gold.snapshot.providerUpdatedAt, gold.now, GOLD_OUTDATED_AFTER_MS) && (
+            <span className="gc-warn">This gold price is more than 72 hours old.</span>
+          )}
           {fellBack && <span className="gc-warn">Exchange rates for {currencyCode} are unavailable, so values are shown in USD.</span>}
         </div>
 

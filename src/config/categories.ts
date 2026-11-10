@@ -1,5 +1,5 @@
 import type { CategoryConfig, CategoryGroup } from '../types/converter.ts'
-import { fuelEconomyConverter } from '../converters/finance/fuel-economy/fuelEconomy.ts'
+import { fuelEconomyConverter } from '../converters/motion-mechanics/fuel-economy/fuelEconomy.ts'
 import { timeConverter } from '../converters/date-time/time/timeConverter.ts'
 
 export const categoryGroups: readonly CategoryGroup[] = [
@@ -38,6 +38,14 @@ export const categories: readonly CategoryConfig[] = [
   soon({ id: 'speed', name: 'Speed', groupId: 'motion' }),
   soon({ id: 'force', name: 'Force', groupId: 'motion' }),
   soon({ id: 'pressure', name: 'Pressure', groupId: 'motion' }),
+  {
+    id: 'fuel-economy',
+    name: 'Fuel Economy Converter',
+    groupId: 'motion',
+    description: fuelEconomyConverter.description,
+    status: 'available',
+    converter: fuelEconomyConverter,
+  },
   // Energy & Electrical
   soon({ id: 'energy', name: 'Energy', groupId: 'energy' }),
   soon({ id: 'power', name: 'Power', groupId: 'energy' }),
@@ -78,15 +86,14 @@ export const categories: readonly CategoryConfig[] = [
     description: 'Live gold rates, plus pure gold and alloy content by weight and purity.',
     status: 'available',
   },
-  {
-    id: 'fuel-economy',
-    name: 'Fuel Economy Converter',
-    groupId: 'finance',
-    description: fuelEconomyConverter.description,
-    status: 'available',
-    converter: fuelEconomyConverter,
-  },
   // Everyday & Lifestyle
+  {
+    id: 'fuel-cost',
+    name: 'Fuel Cost Calculator',
+    groupId: 'lifestyle',
+    description: 'Estimate the fuel needed and the total cost of a journey, including round trips.',
+    status: 'available',
+  },
   soon({ id: 'cooking', name: 'Cooking Measurements', groupId: 'lifestyle' }),
   soon({ id: 'shoe-size', name: 'Shoe Size', groupId: 'lifestyle', description: 'Shoe size conversion is a future feature.' }),
 ]

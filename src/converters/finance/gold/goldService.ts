@@ -1,5 +1,5 @@
 import { createFeed } from '../shared/feed.ts'
-import { isGoldCacheFresh, parseGoldResponse, parseGoldSnapshot } from './goldMath.ts'
+import { parseGoldResponse, parseGoldSnapshot } from './goldMath.ts'
 
 /**
  * gold-api.com: free, keyless, CORS-enabled spot gold (XAU) in USD per troy ounce, with the provider's
@@ -13,9 +13,7 @@ const gold = createFeed({
   serviceName: 'gold price service',
   parseResponse: parseGoldResponse,
   parseStored: parseGoldSnapshot,
-  isFresh: isGoldCacheFresh,
 })
 
 export const fetchGold = gold.fetch
 export const readGoldCache = gold.readCache
-export const freshGoldCache = gold.freshCache

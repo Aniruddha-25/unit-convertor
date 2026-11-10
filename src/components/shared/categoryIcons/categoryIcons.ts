@@ -1,7 +1,7 @@
 import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import {
   faBolt, faCalendar, faCalendarWeek, faCarBattery, faClock, faCoins, faSackDollar, faCube, faDownLeftAndUpRightToCenter,
-  faEarthAmericas, faExpand, faGasPump, faGaugeHigh, faGears, faHandFist, faHardDrive, faHourglassHalf,
+  faEarthAmericas, faExpand, faFileInvoiceDollar, faGasPump, faGaugeHigh, faGears, faHandFist, faHardDrive, faHourglassHalf,
   faHouse, faLayerGroup, faMicrochip, faPlug, faRightLeft, faRuler, faRulerCombined, faScaleBalanced,
   faShapes, faShoePrints, faTemperatureHalf, faUtensils, faWaveSquare, faWallet, faWeightHanging,
 } from '@fortawesome/free-solid-svg-icons'
@@ -30,6 +30,7 @@ export const categoryIcons: Readonly<Record<string, IconDefinition>> = {
   currency: faSackDollar,
   gold: faCoins,
   'fuel-economy': faGasPump,
+  'fuel-cost': faFileInvoiceDollar,
   cooking: faUtensils,
   'shoe-size': faShoePrints,
 }

@@ -1,42 +1,17 @@
-/** Where the data in memory came from. Only a network response can ever be "live". */
-export type RateSource = 'network' | 'cache'
+/** The two visible states: the latest request succeeded, or the device has no connection. */
+export type LiveStatus = 'live' | 'offline'
 
-export type RateStatus = 'live' | 'cached' | 'outdated'
+export const STATUS_LABEL: Readonly<Record<LiveStatus, string>> = { live: 'Live', offline: 'Offline' }
 
-export const STATUS_LABEL: Readonly<Record<RateStatus, string>> = { live: 'Live', cached: 'Cached', outdated: 'Outdated' }
-
-export interface StatusWindows {
-  /** A network copy younger than this is live. */
-  liveWindowMs: number
-  /** Provider data older than this is outdated, whatever its source. */
-  outdatedAfterMs: number
+/** One status for a value built from two feeds: offline if either is, live only when both are confirmed. */
+export function combineStatus(a: LiveStatus | null, b: LiveStatus | null): LiveStatus | null {
+  if (a === 'offline' || b === 'offline') return 'offline'
+  return a === 'live' && b === 'live' ? 'live' : null
 }
 
-/**
- * Freshness label shared by every live feed. Provider age wins (outdated), then only a recent
- * network fetch is live; stored or older copies are always "cached", never "live".
- */
-export function liveStatus(
-  providerUpdatedAt: number | null,
-  fetchedAt: number,
-  source: RateSource,
-  now: number,
-  { liveWindowMs, outdatedAfterMs }: StatusWindows,
-): RateStatus {
-  if (providerUpdatedAt !== null && now - providerUpdatedAt > outdatedAfterMs) return 'outdated'
-  if (source === 'network' && now - fetchedAt <= liveWindowMs) return 'live'
-  return 'cached'
-}
-
-/** A stored copy younger than `maxAgeMs` (and not from the future) can be reused without a request. */
-export function isFresh(fetchedAt: number, now: number, maxAgeMs: number): boolean {
-  const age = now - fetchedAt
-  return age >= 0 && age < maxAgeMs
-}
-
-const SEVERITY: Record<RateStatus, number> = { live: 0, cached: 1, outdated: 2 }
-/** The less trustworthy of two statuses - a value built from two feeds is only as fresh as the older one. */
-export const worstStatus = (a: RateStatus, b: RateStatus): RateStatus => (SEVERITY[a] >= SEVERITY[b] ? a : b)
+/** True when the provider's own data is older than `afterMs` (a warning, not a status). Unknown age is not outdated. */
+export const isProviderOutdated = (providerUpdatedAt: number | null, now: number, afterMs: number): boolean =>
+  providerUpdatedAt !== null && now - providerUpdatedAt > afterMs
 
 /** Provider timestamp in the user's time zone, with its abbreviation; "unavailable" when not supplied. */
 export function formatProviderTime(ms: number | null, timeZone: string = userTimeZone()): string {

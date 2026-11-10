@@ -1,5 +1,5 @@
 import { createFeed } from '../shared/feed.ts'
-import { isCacheFresh, parseSnapshot, snapshotFromProvider } from './currencyMath.ts'
+import { parseSnapshot, snapshotFromProvider } from './currencyMath.ts'
 
 /**
  * open.er-api.com: free, keyless, CORS-enabled, ~160 currencies, and reports the provider's own
@@ -15,9 +15,7 @@ const rates = createFeed({
   serviceName: 'rate service',
   parseResponse: snapshotFromProvider,
   parseStored: parseSnapshot,
-  isFresh: isCacheFresh,
 })
 
 export const fetchRates = rates.fetch
 export const readCache = rates.readCache
-export const freshCache = rates.freshCache

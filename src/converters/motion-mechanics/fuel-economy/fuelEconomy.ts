@@ -48,10 +48,4 @@ export const fuelEconomyConverter: ConverterConfig = {
   validate: (value) => validateFuelEconomy(value),
   allowNegative: false,
   displayDigits: 6,
-  notes: [
-    'km/L and L/100 km are inverses of each other: L/100 km = 100 ÷ (km/L).',
-    'A US gallon is 3.785411784 L and a UK (imperial) gallon is 4.54609 L, so MPG (UK) is about 1.2 × MPG (US) for the same car.',
-    'Lower L/100 km means better economy, while higher km/L and MPG mean better economy.',
-    'Zero is not accepted. Results show up to 6 significant digits.',
-  ],
 }

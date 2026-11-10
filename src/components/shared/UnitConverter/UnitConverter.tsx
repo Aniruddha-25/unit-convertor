@@ -120,17 +120,6 @@ export default function UnitConverter({ config, showHeader = true }: Props) {
           Clear
         </button>
       </div>
-
-      {config.notes && config.notes.length > 0 && (
-        <details className="uc-notes">
-          <summary>Conversion notes</summary>
-          <ul>
-            {config.notes.map((n) => (
-              <li key={n}>{n}</li>
-            ))}
-          </ul>
-        </details>
-      )}
     </section>
   )
 }

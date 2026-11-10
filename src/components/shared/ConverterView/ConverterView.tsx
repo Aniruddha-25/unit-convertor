@@ -6,6 +6,7 @@ import UnitConverter from '../UnitConverter/UnitConverter.tsx'
 
 const GoldConverter = lazy(() => import('../../../converters/finance/gold/GoldConverter.tsx'))
 const CurrencyConverter = lazy(() => import('../../../converters/finance/currency/CurrencyConverter.tsx'))
+const FuelCostCalculator = lazy(() => import('../../../converters/everyday-lifestyle/fuel-cost/FuelCostCalculator.tsx'))
 
 /** Categories that need a richer UI than the generic unit converter register here by id. */
 const customConfigViews: Record<string, ComponentType<{ config: ConverterConfig }>> = {
@@ -17,6 +18,7 @@ const standaloneViews: Record<string, ComponentType> = {
   'time-zone': TimeZoneConverter,
   gold: GoldConverter,
   currency: CurrencyConverter,
+  'fuel-cost': FuelCostCalculator,
 }
 
 export default function ConverterView({ category }: { category: CategoryConfig }) {

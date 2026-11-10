@@ -1,4 +1,3 @@
-import { isFresh, liveStatus, type RateSource, type RateStatus } from '../shared/status.ts'
 import { GRAMS_PER_TROY_OUNCE } from './weight.ts'
 import type { Purity } from './purity.ts'
 
@@ -12,8 +11,6 @@ export interface GoldSnapshot {
 }
 
 export const GOLD_REFRESH_INTERVAL_MS = 5 * 60_000
-/** A network quote is "live" only while younger than this (refresh interval + grace). */
-export const GOLD_LIVE_WINDOW_MS = GOLD_REFRESH_INTERVAL_MS + 3 * 60_000
 /** Spot gold trades around the clock on weekdays; a quote older than this (a long weekend) is outdated. */
 export const GOLD_OUTDATED_AFTER_MS = 72 * 3_600_000
 
@@ -57,10 +54,5 @@ export function parseGoldSnapshot(raw: unknown): GoldSnapshot | null {
   }
 }
 
-export function goldStatus(s: GoldSnapshot, source: RateSource, now: number): RateStatus {
-  return liveStatus(s.providerUpdatedAt, s.fetchedAt, source, now, { liveWindowMs: GOLD_LIVE_WINDOW_MS, outdatedAfterMs: GOLD_OUTDATED_AFTER_MS })
-}
-
 export const goldNextRefreshAt = (s: GoldSnapshot): number => s.fetchedAt + GOLD_REFRESH_INTERVAL_MS
 
-export const isGoldCacheFresh = (s: GoldSnapshot, now: number): boolean => isFresh(s.fetchedAt, now, GOLD_REFRESH_INTERVAL_MS)

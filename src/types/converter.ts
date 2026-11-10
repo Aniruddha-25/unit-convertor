@@ -22,8 +22,6 @@ export interface ConverterConfig {
   validate?: (value: number, fromUnitId: string) => string | null
   /** Significant digits shown in results (default 12). */
   displayDigits?: number
-  /** Assumptions shown to the user under the converter. */
-  notes?: readonly string[]
 }
 
 export type CategoryStatus = 'available' | 'coming-soon'

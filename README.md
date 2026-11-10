@@ -32,6 +32,7 @@ flowchart LR
     D --> D1["Speed"]
     D --> D2["Force"]
     D --> D3["Pressure"]
+    D --> D4["Fuel Economy Converter"]
 
     E --> E1["Energy"]
     E --> E2["Power"]
@@ -48,8 +49,8 @@ flowchart LR
     I --> I1["Currency"]
     I --> I2["Gold Converter"]
   
-    I --> I3["Fuel Economy Converter"]
 
+    H --> H1["Fuel Cost Calculator"]
     H --> H2["Cooking Measurements"]
     H --> H3["Shoe Size"]
 
@@ -67,12 +68,12 @@ flowchart LR
     class A root
     class B,B1,B2,B3,B4,B5 basic
     class C,C1,C2 geometry
-    class D,D1,D2,D3 motion
+    class D,D1,D2,D3,D4 motion
     class E,E1,E2,E3 energy
     class F,F1,F2,F3,F4 datetime
     class G,G1,G2 digital
-    class I,I1,I2,I3 finance
-    class H,H2,H3 lifestyle
+    class I,I1,I2 finance
+    class H,H1,H2,H3 lifestyle
 ```
 
 ## Tech Stack

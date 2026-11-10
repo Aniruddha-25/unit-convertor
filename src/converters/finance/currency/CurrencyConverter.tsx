@@ -1,12 +1,12 @@
 import { useId, useMemo, useState } from 'react'
 import { buildCurrencyList } from './currencyData.ts'
-import { convertAmount, formatAmount } from './currencyMath.ts'
+import { OUTDATED_AFTER_MS, convertAmount, formatAmount } from './currencyMath.ts'
 import { parseInput } from '../../../utils/conversionUtils.ts'
 import { categoryIcons } from '../../../components/shared/categoryIcons/categoryIcons.ts'
 import AppIcon from '../../../components/shared/AppIcon/AppIcon.tsx'
 import CopyButton from '../../../components/shared/CopyButton/CopyButton.tsx'
 import CurrencyCombobox from './CurrencyCombobox.tsx'
-import { formatProviderTime } from '../shared/status.ts'
+import { formatProviderTime, isProviderOutdated } from '../shared/status.ts'
 import StatusBadge from '../shared/StatusBadge.tsx'
 import { useExchangeRates } from './useExchangeRates.ts'
 import '../../../components/shared/converter.css'
@@ -17,7 +17,7 @@ const resultDecimals = (value: number, decimals: number) => (Math.abs(value) < 1
 
 export default function CurrencyConverter() {
   const uid = useId()
-  const { snapshot, status, loading, error, refresh } = useExchangeRates()
+  const { snapshot, status, loading, error, now } = useExchangeRates()
   const [input, setInput] = useState('1')
   const [fromCode, setFromCode] = useState('USD')
   const [toCode, setToCode] = useState('INR')
@@ -45,12 +45,13 @@ export default function CurrencyConverter() {
   if (!snapshot) {
     body = (
       <div className="cc-state" role={error ? 'alert' : 'status'}>
-        {loading ? 'Loading exchange rates…' : error ?? 'No exchange rates available.'}
-        {!loading && (
-          <button type="button" className="uc-clear" onClick={refresh}>
-            Try again
-          </button>
-        )}
+        {loading
+          ? 'Loading exchange rates…'
+          : status === 'offline'
+            ? "You're offline. Rates will load when the connection returns."
+            : error
+              ? `${error} Retrying automatically.`
+              : 'No exchange rates available.'}
       </div>
     )
   } else if (!from || !to) {
@@ -130,9 +131,7 @@ export default function CurrencyConverter() {
       <div className="cc-info">
         <div className="cc-info-head">
           <StatusBadge status={status} loading={loading} />
-          <button type="button" className="uc-clear cc-refresh" onClick={refresh} disabled={loading}>
-            {loading ? 'Refreshing…' : '↻ Refresh'}
-          </button>
+          {loading && snapshot && <span className="cc-updating">Updating…</span>}
         </div>
         {snapshot && (
           <p className="cc-updated">
@@ -140,27 +139,17 @@ export default function CurrencyConverter() {
             {formatProviderTime(snapshot.providerUpdatedAt)}
           </p>
         )}
-        {error && snapshot && (
+        {error && snapshot && status !== 'offline' && (
           <p className="cc-warn" role="alert">
-            {error} Showing {status === 'outdated' ? 'outdated' : 'previously saved'} rates.
+            {error} Showing previously saved rates.
           </p>
         )}
-        {status === 'outdated' && !error && <p className="cc-warn">These rates are more than 48 hours old.</p>}
+        {snapshot && !error && isProviderOutdated(snapshot.providerUpdatedAt, now, OUTDATED_AFTER_MS) && (
+          <p className="cc-warn">These rates are more than 48 hours old.</p>
+        )}
       </div>
 
       {body}
-
-      <details className="uc-notes">
-        <summary>Conversion notes</summary>
-        <ul>
-          <li>Rates are mid-market reference rates and exclude bank or card fees; do not use them for transactions.</li>
-          <li>Live = fetched from the provider within the last 35 minutes. Cached = a saved or older copy. Outdated = provider data older than 48 hours.</li>
-          <li>Rates refresh automatically every 30 minutes while this is open; the provider itself updates about once a day.</li>
-          <li>
-            Rates by <a href="https://www.exchangerate-api.com" target="_blank" rel="noreferrer">ExchangeRate-API</a>. Flags by flag-icons.
-          </li>
-        </ul>
-      </details>
     </section>
   )
 }

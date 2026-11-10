@@ -10,15 +10,12 @@ export interface FeedOptions<T> {
   parseResponse: (json: unknown, fetchedAt: number) => T
   /** Validate untrusted stored JSON into T, or null. */
   parseStored: (raw: unknown) => T | null
-  isFresh: (data: T, now: number) => boolean
 }
 
 export interface Feed<T> {
   /** Always hits the network; rejects with a readable error on timeout, HTTP error, offline or a bad payload. */
   fetch: (signal?: AbortSignal) => Promise<T>
   readCache: () => T | null
-  /** A stored copy young enough to reuse on load without a request. */
-  freshCache: (now?: number) => T | null
 }
 
 /** One fetch-with-timeout + localStorage cache implementation for every live feed. */
@@ -66,9 +63,5 @@ export function createFeed<T>(o: FeedOptions<T>): Feed<T> {
   return {
     fetch: fetchFeed,
     readCache,
-    freshCache: (now = Date.now()) => {
-      const cached = readCache()
-      return cached && o.isFresh(cached, now) ? cached : null
-    },
   }
 }

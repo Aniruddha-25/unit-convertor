@@ -1,14 +1,11 @@
-import { isFresh, liveStatus, type RateSource, type RateStatus } from '../shared/status.ts'
 import type { RateSnapshot } from './types.ts'
 
 const MINUTE = 60_000
 const HOUR = 60 * MINUTE
 
-/** Automatic refresh cadence, and the age under which a stored snapshot is reused without a request. */
-export const REFRESH_INTERVAL_MS = 30 * MINUTE
-/** A network snapshot counts as live only while it is younger than this (refresh interval + grace). */
-export const LIVE_WINDOW_MS = REFRESH_INTERVAL_MS + 5 * MINUTE
-/** The provider publishes daily; rates older than this are flagged as outdated. */
+/** Automatic update cadence for exchange rates. */
+export const REFRESH_INTERVAL_MS = 15 * MINUTE
+/** The provider publishes daily; rates older than this get a warning. */
 export const OUTDATED_AFTER_MS = 48 * HOUR
 
 /** Cross rate: amount × (rate[to] ÷ rate[from]), both quoted against the same base. */
@@ -19,15 +16,10 @@ export function convertAmount(amount: number, from: string, to: string, rates: R
   return (amount * rt) / rf
 }
 
-export function rateStatus(snapshot: RateSnapshot, source: RateSource, now: number): RateStatus {
-  return liveStatus(snapshot.providerUpdatedAt, snapshot.fetchedAt, source, now, { liveWindowMs: LIVE_WINDOW_MS, outdatedAfterMs: OUTDATED_AFTER_MS })
-}
-
 export function nextRefreshAt(snapshot: RateSnapshot): number {
   return snapshot.fetchedAt + REFRESH_INTERVAL_MS
 }
 
-export const isCacheFresh = (snapshot: RateSnapshot, now: number): boolean => isFresh(snapshot.fetchedAt, now, REFRESH_INTERVAL_MS)
 
 /** Validate untrusted JSON (provider response or localStorage) into a snapshot, or null. */
 export function parseSnapshot(raw: unknown): RateSnapshot | null {

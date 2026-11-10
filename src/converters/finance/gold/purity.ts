@@ -30,8 +30,8 @@ export const goldPercent = (fineness: number): number => fineness / 10
 /** Mass of pure gold in `grams` of an alloy of the given fineness. */
 export const pureGoldGrams = (grams: number, fineness: number): number => (grams * fineness) / 1000
 
-/** Dropdown label: the purity as a percentage (916 -> "91.6%"). */
-export const purityPercentLabel = (p: Purity): string => `${goldPercent(p.fineness)}%`
+/** Dropdown label: karat and purity percentage (916 -> "22K — 91.6%"). Shown for the options and the closed select. */
+export const purityOptionLabel = (p: Purity): string => `${p.label} — ${goldPercent(p.fineness)}%`
 
 export const FINENESS_MAX = 1000
 

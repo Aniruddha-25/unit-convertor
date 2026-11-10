@@ -1,0 +1,9 @@
+.fc-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; align-items: start; }
+.fc-check { display: flex; align-items: center; gap: 8px; margin: 0 0 16px; cursor: pointer; }
+.uc .fc-check input { width: auto; }
+.fc-facts { display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; margin: 16px 0 0; font-size: .95rem; color: var(--muted); }
+.fc-facts dt { font-weight: 600; }
+.fc-facts dd { margin: 0; color: var(--text); overflow-wrap: anywhere; }
+@media (max-width: 560px) {
+  .fc-inputs { grid-template-columns: 1fr; }
+}

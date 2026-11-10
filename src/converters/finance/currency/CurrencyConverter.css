@@ -1,7 +1,6 @@
 .cc-info { margin: 0 0 16px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-size: .85rem; }
 .cc-info-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-.cc-refresh { padding: 4px 12px; font-size: .85rem; }
-.cc-refresh:disabled { opacity: .6; cursor: default; }
+.cc-updating { color: var(--muted); }
 .cc-warn { margin: 8px 0 0; color: var(--danger); }
 .cc-state { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 20px 0; color: var(--muted); }
 
