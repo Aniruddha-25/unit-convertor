@@ -14,6 +14,8 @@
   },
   "dependencies": {
     "@js-temporal/polyfill": "^0.5.1",
+    "country-data-list": "^1.6.3",
+    "flag-icons": "^7.6.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },

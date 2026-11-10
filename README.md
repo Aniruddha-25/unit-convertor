@@ -57,7 +57,7 @@ flowchart LR
     classDef datetime fill:#fef3c7,stroke:#d97706,color:#78350f
     classDef digital fill:#dcfce7,stroke:#16a34a,color:#14532d
     classDef lifestyle fill:#f3e8ff,stroke:#9333ea,color:#581c87
-    classDef available stroke-width:4px
+  
 
     class A root
     class B,B1,B2,B3,B4,B5 basic
@@ -67,7 +67,6 @@ flowchart LR
     class F,F1,F2,F3,F4 datetime
     class G,G1,G2 digital
     class H,H0,H1,H2,H3 lifestyle
-    class F1,F2 available
 ```
 
 ## Tech Stack
