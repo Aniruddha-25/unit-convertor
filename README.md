@@ -6,77 +6,82 @@ A React + TypeScript web app for unit conversion. Pick a category from the grid 
 
 ## Converters
 
-Currently available: **Time** (Duration, Clock time) and **Time Zone**. All others are coming soon.
 
 ```mermaid
 flowchart LR
     A["Unit Converter"]
 
-    A --> B["Physical"]
-    A --> C["Computer"]
-    A --> D["Date & Time"]
-    A --> E["Other"]
+    A --> B["Basic Measurements"]
+    A --> C["Geometry & Mathematics"]
+    A --> D["Motion & Mechanics"]
+    A --> E["Energy & Electrical"]
+    A --> F["Date & Time"]
+    A --> G["Digital & Computing"]
+    A --> H["Everyday & Lifestyle"]
 
-    B --> B1["Time<br/>(Duration, Clock time)"]
-    B --> B2["Length"]
-    B --> B3["Area"]
-    B --> B4["Volume"]
-    B --> B5["Mass / Weight"]
-    B --> B6["Temperature"]
-    B --> B7["Speed"]
-    B --> B8["Pressure"]
-    B --> B9["Energy"]
-    B --> B10["Power"]
-    B --> B11["Force"]
-    B --> B12["Density"]
-    B --> B13["Frequency"]
-    B --> B14["Angle"]
+    B --> B1["Length"]
+    B --> B2["Area"]
+    B --> B3["Volume"]
+    B --> B4["Mass / Weight"]
+    B --> B5["Temperature"]
 
-    C --> C1["Data Storage"]
-    C --> C2["Data Transfer Rate"]
+    C --> C1["Angle"]
+    C --> C2["Density"]
 
-    D --> D1["Time Zone"]
-    D --> D2["Time Duration"]
-    D --> D3["Date Difference"]
+    D --> D1["Speed"]
+    D --> D2["Force"]
+    D --> D3["Pressure"]
 
-    E --> E1["Fuel Economy"]
-    E --> E2["Cooking Measurements"]
-    E --> E3["Shoe Size"]
+    E --> E1["Energy"]
+    E --> E2["Power"]
+    E --> E3["Frequency"]
+
+    F --> F1["Time<br/>(Duration, Clock time)"]
+    F --> F2["Time Zone"]
+    F --> F3["Time Duration"]
+    F --> F4["Date Difference"]
+
+    G --> G1["Data Storage"]
+    G --> G2["Data Transfer Rate"]
+
+    H --> H1["Fuel Economy"]
+    H --> H2["Cooking Measurements"]
+    H --> H3["Shoe Size"]
 
     classDef root fill:#e5e7eb,stroke:#374151,color:#111827
-    classDef physical fill:#dbeafe,stroke:#2563eb,color:#1e3a8a
-    classDef computer fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef basic fill:#dbeafe,stroke:#2563eb,color:#1e3a8a
+    classDef geometry fill:#cffafe,stroke:#0891b2,color:#164e63
+    classDef motion fill:#fee2e2,stroke:#dc2626,color:#7f1d1d
+    classDef energy fill:#ffedd5,stroke:#ea580c,color:#7c2d12
     classDef datetime fill:#fef3c7,stroke:#d97706,color:#78350f
-    classDef other fill:#f3e8ff,stroke:#9333ea,color:#581c87
+    classDef digital fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef lifestyle fill:#f3e8ff,stroke:#9333ea,color:#581c87
+    classDef available stroke-width:4px
 
     class A root
-    class B,B1,B2,B3,B4,B5,B6,B7,B8,B9,B10,B11,B12,B13,B14 physical
-    class C,C1,C2 computer
-    class D,D1,D2,D3 datetime
-    class E,E1,E2,E3 other
+    class B,B1,B2,B3,B4,B5 basic
+    class C,C1,C2 geometry
+    class D,D1,D2,D3 motion
+    class E,E1,E2,E3 energy
+    class F,F1,F2,F3,F4 datetime
+    class G,G1,G2 digital
+    class H,H1,H2,H3 lifestyle
+    class F1,F2 available
 ```
-
-> Source of truth: [src/config/categories.ts](src/config/categories.ts)
-
-### Adding a converter
-
-1. Add or update the category in `src/config/categories.ts` (set `status: 'available'` and attach a `converter`).
-2. Update the diagram above: add a node under its group and list it in the matching `class` line.
 
 ## Tech Stack
 
 - React 19 + TypeScript
 - Vite
-- `@js-temporal/polyfill` (time zones and DST)
 - ESLint, Node test runner
 
 ## Getting Started
 
-Requires Node.js (CI uses 22).
-
 ```bash
 git clone https://github.com/Aniruddha-25/unit-convertor.git
-cd unit-convertor
+```
+
+```bash
 npm install
 ```
 
@@ -96,11 +101,3 @@ Deployed to GitHub Pages by `.github/workflows/deploy.yml` on every push to `mai
 2. Push to `main`.
 
 The Vite base path is `/unit-convertor/` ([vite.config.ts](vite.config.ts)). Update it if the repository is renamed.
-
-## Contributing
-
-Fork, create a branch, run `npm run lint` and `npm test`, then open a pull request.
-
-## License
-
-No license file is included yet.
